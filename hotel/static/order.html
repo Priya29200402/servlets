@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>X-Workz - Order Food</title>
+</head>
+<body>
+    <h1>Order Food</h1>
+    <form action="submit_order.html" method="post">
+        <label for="food">Select Food:</label>
+        <select name="food" id="food">
+            <option value="pizza">Pizza</option>
+            <option value="burger">Burger</option>
+            <option value="pasta">Pasta</option>
+        </select>
+        <br><br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" id="quantity" min="1" value="1">
+        <br><br>
+        <input type="submit" value="Place Order">
+    </form>
+</body>
+</html>
