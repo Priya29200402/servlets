@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Trip Booking</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white text-center">
+                    <h3>Travel Trip Booking</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <form action="travel" method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label">Destination Name</label>
+                            <input type="text" class="form-control"
+                                   name="destination"
+                                   placeholder="Enter Destination">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Travel Date</label>
+                            <input type="date" class="form-control"
+                                   name="travelDate">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Return Date</label>
+                            <input type="date" class="form-control"
+                                   name="returnDate">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Number of Travelers</label>
+                            <input type="number" class="form-control"
+                                   name="travelers"
+                                   placeholder="Enter Number of Travelers">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Budget</label>
+                            <input type="number" step="0.01"
+                                   class="form-control"
+                                   name="budget"
+                                   placeholder="Enter Budget">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Transport Mode</label>
+                            <select class="form-select" name="transport">
+                                <option>Bus</option>
+                                <option>Train</option>
+                                <option>Flight</option>
+                                <option>Car</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid">
+                            <button class="btn btn-success" type="submit">
+                                Book Trip
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
