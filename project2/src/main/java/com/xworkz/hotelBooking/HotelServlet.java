@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 @WebServlet("/hotel")
 public class HotelServlet extends HttpServlet {
+
+    private static final Pattern CONTACT_PATTERN = Pattern.compile("[6-9][0-9]{9}");
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -36,129 +37,104 @@ public class HotelServlet extends HttpServlet {
         System.out.println("Contact Number: " + contact);
 
         resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
+        PrintWriter writer = resp.getWriter();
 
-        System.out.println("======Validating guest name=======");
+        boolean valid = true;
+        LocalDate checkInDate = null;
+        LocalDate checkOutDate = null;
+
+        // Guest name
         if (guestName == null || guestName.trim().length() < 3) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Guest Name must contain at least 3 characters</p>");
-            out.println("<a href='/static/hotel.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+            valid = false;
+            writer.println("<h3 style='color:red'>Guest Name must contain at least 3 characters</h3>");
         }
 
-        System.out.println("======Validating hotel name=======");
+        // Hotel name
         if (hotelName == null || hotelName.trim().length() < 3) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Hotel Name must contain at least 3 characters</p>");
-            out.println("<a href='/static/hotel.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+            valid = false;
+            writer.println("<h3 style='color:red'>Hotel Name must contain at least 3 characters</h3>");
         }
 
-        System.out.println("======Validating room type=======");
+        // Room type
         String[] validRooms = {"Single", "Double", "Deluxe", "Suite"};
         boolean validRoom = false;
-
         for (String room : validRooms) {
             if (room.equalsIgnoreCase(roomType)) {
                 validRoom = true;
                 break;
             }
         }
-
         if (!validRoom) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Invalid Room Type</p>");
-            out.println("<a href='/static/hotel.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+            valid = false;
+            writer.println("<h3 style='color:red'>Invalid Room Type</h3>");
         }
 
-        System.out.println("======Validating check-in date=======");
-        LocalDate checkInDate = null;
-        LocalDate checkOutDate = null;
-
+        // Check-in date
         try {
-            checkInDate = LocalDate.parse(checkIn, DateTimeFormatter.ISO_LOCAL_DATE);
-
+            checkInDate = LocalDate.parse(checkIn);
             if (checkInDate.isBefore(LocalDate.now())) {
-                out.println("<html><body>");
-                out.println("<h1 style='color:red;'>Validation Error</h1>");
-                out.println("<p>Check-In Date cannot be in the past</p>");
-                out.println("<a href='/static/hotel.html'>Go Back</a>");
-                out.println("</body></html>");
-                return;
+                valid = false;
+                writer.println("<h3 style='color:red'>Check-In Date cannot be in the past</h3>");
             }
-
         } catch (DateTimeParseException e) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Invalid Check-In Date</p>");
-            out.println("<a href='/static/hotel.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+            valid = false;
+            writer.println("<h3 style='color:red'>Invalid Check-In Date</h3>");
         }
 
-        System.out.println("======Validating check-out date=======");
+        // Check-out date
         try {
-            checkOutDate = LocalDate.parse(checkOut, DateTimeFormatter.ISO_LOCAL_DATE);
-
+            checkOutDate = LocalDate.parse(checkOut);
             if (checkInDate != null && !checkOutDate.isAfter(checkInDate)) {
-                out.println("<html><body>");
-                out.println("<h1 style='color:red;'>Validation Error</h1>");
-                out.println("<p>Check-Out Date must be after Check-In Date</p>");
-                out.println("<a href='/static/hotel.html'>Go Back</a>");
-                out.println("</body></html>");
-                return;
+                valid = false;
+                writer.println("<h3 style='color:red'>Check-Out Date must be after Check-In Date</h3>");
             }
-
         } catch (DateTimeParseException e) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Invalid Check-Out Date</p>");
-            out.println("<a href='/static/hotel.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+            valid = false;
+            writer.println("<h3 style='color:red'>Invalid Check-Out Date</h3>");
         }
 
-        System.out.println("======Validating number of guests=======");
+        // Guests
         try {
             int totalGuests = Integer.parseInt(guests);
-
             if (totalGuests <= 0) {
-                out.println("<html><body>");
-                out.println("<h1 style='color:red;'>Validation Error</h1>");
-                out.println("<p>Number of Guests must be greater than 0</p>");
-                out.println("<a href='/static/hotel.html'>Go Back</a>");
-                out.println("</body></html>");
-                return;
+                valid = false;
+                writer.println("<h3 style='color:red'>Number of Guests must be greater than 0</h3>");
             }
-
         } catch (NumberFormatException e) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Invalid Number of Guests</p>");
-            out.println("<a href='/static/hotel.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+            valid = false;
+            writer.println("<h3 style='color:red'>Invalid Number of Guests</h3>");
         }
 
-        System.out.println("======Validating contact number=======");
-        if (contact == null || !Pattern.matches("[6-9][0-9]{9}", contact)) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Invalid Contact Number</p>");
-            out.println("<a href='/static/hotel.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+        // Contact
+        if (contact == null || !CONTACT_PATTERN.matcher(contact).matches()) {
+            valid = false;
+            writer.println("<h3 style='color:red'>Invalid Contact Number</h3>");
         }
 
-        out.println("<html><body>");
-        out.println("<h1>Hotel Booking Successful</h1>");
-        out.println("</body></html>");
+        if (valid) {
+            writer.println("<html>");
+            writer.println("<body style='font-family:Arial;text-align:center;background:#f4f4f4;'>");
+            writer.println("<h1 style='color:green'>Hotel Booking Successful</h1>");
+            writer.println("<h3>Guest Name : " + guestName + "</h3>");
+            writer.println("<h3>Hotel Name : " + hotelName + "</h3>");
+            writer.println("<h3>Room Type : " + roomType + "</h3>");
+            writer.println("<h3>Check-In : " + checkIn + "</h3>");
+            writer.println("<h3>Check-Out : " + checkOut + "</h3>");
+            writer.println("<h3>Guests : " + guests + "</h3>");
+            writer.println("<h3>Contact : " + contact + "</h3>");
+            writer.println("<br>");
+            writer.println("<a href='hotel.html'>");
+            writer.println("<button>Book Another</button>");
+            writer.println("</a>");
+            writer.println("</body>");
+            writer.println("</html>");
+        } else {
+            writer.println("<br>");
+            writer.println("<a href='hotel.html'>");
+            writer.println("<button>Go Back</button>");
+            writer.println("</a>");
+        }
+
+        writer.close();
     }
 }

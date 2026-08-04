@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/recipe")
+@WebServlet(urlPatterns = "/recipe",loadOnStartup = 1)
 public class RecipeServlet extends HttpServlet {
 
     @Override
@@ -30,74 +30,71 @@ public class RecipeServlet extends HttpServlet {
         System.out.println("Calories: " + calories);
 
         resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
+        PrintWriter writer = resp.getWriter();
 
-        System.out.println("======Validating cooking time=======");
+        boolean valid = true;
+
+        // Cooking time validation
         try {
             int time = Integer.parseInt(cookingTime);
-
             if (time <= 0) {
-                out.println("<html><body>");
-                out.println("<h1 style='color:red;'>Validation Error</h1>");
-                out.println("<p>Cooking Time must be greater than 0</p>");
-                out.println("<a href='/static/recipe.html'>Go Back</a>");
-                out.println("</body></html>");
-                return;
+                valid = false;
+                writer.println("<h3 style='color:red'>Cooking Time must be greater than 0</h3>");
             }
-
         } catch (NumberFormatException e) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Invalid Cooking Time</p>");
-            out.println("<a href='/static/recipe.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+            valid = false;
+            writer.println("<h3 style='color:red'>Invalid Cooking Time</h3>");
         }
 
-        System.out.println("======Validating difficulty level=======");
+        // Difficulty validation
         String[] levels = {"Easy", "Medium", "Hard"};
         boolean validLevel = false;
-
         for (String level : levels) {
             if (level.equalsIgnoreCase(difficulty)) {
                 validLevel = true;
                 break;
             }
         }
-
         if (!validLevel) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Difficulty must be Easy, Medium or Hard</p>");
-            out.println("<a href='/static/recipe.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+            valid = false;
+            writer.println("<h3 style='color:red'>Difficulty must be Easy, Medium or Hard</h3>");
         }
 
-        System.out.println("======Validating calories=======");
+        // Calories validation
         try {
             int cal = Integer.parseInt(calories);
-
             if (cal < 50 || cal > 2000) {
-                out.println("<html><body>");
-                out.println("<h1 style='color:red;'>Validation Error</h1>");
-                out.println("<p>Calories must be between 50 and 2000</p>");
-                out.println("<a href='/static/recipe.html'>Go Back</a>");
-                out.println("</body></html>");
-                return;
+                valid = false;
+                writer.println("<h3 style='color:red'>Calories must be between 50 and 2000</h3>");
             }
-
         } catch (NumberFormatException e) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Invalid Calories</p>");
-            out.println("<a href='/static/recipe.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+            valid = false;
+            writer.println("<h3 style='color:red'>Invalid Calories</h3>");
         }
 
-        out.println("<html><body>");
-        out.println("<h1>Recipe Added Successfully</h1>");
-        out.println("</body></html>");
+        if (valid) {
+            writer.println("<html>");
+            writer.println("<body style='font-family:Arial;text-align:center;background:#f4f4f4;'>");
+            writer.println("<h1 style='color:green'>Recipe Added Successfully</h1>");
+            writer.println("<h3>Recipe Name : " + recipeName + "</h3>");
+            writer.println("<h3>Cuisine Type : " + cuisineType + "</h3>");
+            writer.println("<h3>Cooking Time : " + cookingTime + " minutes</h3>");
+            writer.println("<h3>Difficulty : " + difficulty + "</h3>");
+            writer.println("<h3>Ingredients Count : " + ingredients + "</h3>");
+            writer.println("<h3>Calories : " + calories + "</h3>");
+            writer.println("<br>");
+            writer.println("<a href='recipe.html'>");
+            writer.println("<button>Add Another Recipe</button>");
+            writer.println("</a>");
+            writer.println("</body>");
+            writer.println("</html>");
+        } else {
+            writer.println("<br>");
+            writer.println("<a href='recipe.html'>");
+            writer.println("<button>Go Back</button>");
+            writer.println("</a>");
+        }
+
+        writer.close();
     }
 }
