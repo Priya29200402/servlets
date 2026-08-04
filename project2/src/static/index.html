@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Welcome to Our Platform</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+
+            background:url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80");
+
+            background-size:cover;
+            background-position:center;
+            background-attachment:fixed;
+
+            font-family:'Segoe UI',sans-serif;
+
+        }
+
+        .overlay{
+
+            min-height:100vh;
+            background:rgba(0,0,0,.60);
+
+        }
+
+        .navbar{
+
+            background:rgba(0,0,0,.35);
+            backdrop-filter:blur(12px);
+
+        }
+
+        .navbar-brand{
+
+            font-size:30px;
+            font-weight:bold;
+
+        }
+
+        .hero{
+
+            padding:80px 20px;
+            text-align:center;
+            color:white;
+
+        }
+
+        .hero h1{
+
+            font-size:55px;
+            font-weight:bold;
+
+        }
+
+        .hero p{
+
+            font-size:22px;
+            margin-top:15px;
+
+        }
+
+        .project-card{
+
+            background:rgba(255,255,255,.92);
+
+            border-radius:20px;
+
+            padding:25px;
+
+            box-shadow:0 15px 30px rgba(0,0,0,.4);
+
+            transition:.4s;
+
+            height:100%;
+
+        }
+
+        .project-card:hover{
+
+            transform:translateY(-10px);
+
+        }
+
+        .project-card h4{
+
+            font-weight:bold;
+
+        }
+
+        .btn{
+
+            border-radius:30px;
+            font-weight:bold;
+
+        }
+
+        footer{
+
+            text-align:center;
+            color:white;
+            padding:30px;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="overlay">
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="index.html">
+
+                🌐 Smart Service Portal
+
+            </a>
+
+            <button class="navbar-toggler"
+
+                    type="button"
+
+                    data-bs-toggle="collapse"
+
+                    data-bs-target="#menu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">🏠 Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="vehicle.html">🚗 Vehicle</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="event.html">🎉 Event</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="hotel.html">🏨 Hotel</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="recipe.html">🍽 Recipe</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="travel.html">✈ Travel</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <div class="hero">
+
+        <h1>Welcome to Our Platform</h1>
+
+        <p>
+
+            Manage registrations, bookings and trips easily using our Smart Service Portal.
+
+        </p>
+
+    </div>
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="project-card text-center">
+
+                    <h4>🚗 Vehicle Registration</h4>
+
+                    <p>
+                        Register vehicles with complete validation and secure details.
+                    </p>
+
+                    <a href="vehicle.html" class="btn btn-primary">
+                        Open Module
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="project-card text-center">
+
+                    <h4>🎉 Event Registration</h4>
+
+                    <p>
+                        Create and manage event registrations quickly.
+                    </p>
+
+                    <a href="event.html" class="btn btn-success">
+                        Open Module
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="project-card text-center">
+
+                    <h4>🏨 Hotel Booking</h4>
+
+                    <p>
+                        Reserve hotel rooms with easy booking options.
+                    </p>
+
+                    <a href="hotel.html" class="btn btn-warning">
+                        Open Module
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="project-card text-center">
+
+                    <h4>🍽 Recipe Management</h4>
+
+                    <p>
+                        Store and manage your favorite recipes efficiently.
+                    </p>
+
+                    <a href="recipe.html" class="btn btn-danger">
+                        Open Module
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="project-card text-center">
+
+                    <h4>✈ Travel Trip Planner</h4>
+
+                    <p>
+                        Plan exciting trips with complete travel details.
+                    </p>
+
+                    <a href="travel.html" class="btn btn-info">
+                        Open Module
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+
+        <h5>Smart Service Portal</h5>
+
+        <p>Designed by Priya❤️ </p>
+
+    </footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
