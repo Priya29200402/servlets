@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 @WebServlet("/event")
@@ -33,80 +32,69 @@ public class EventServlet extends HttpServlet {
         System.out.println("Fee: " + fee);
 
         resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
+        PrintWriter writer = resp.getWriter();
 
-        System.out.println("======Validating event date=======");
+        boolean valid = true;
+
+        // Event Date Validation (must be future)
         try {
-            LocalDate date = LocalDate.parse(eventDate, DateTimeFormatter.ISO_LOCAL_DATE);
-
+            LocalDate date = LocalDate.parse(eventDate);
             if (!date.isAfter(LocalDate.now())) {
-                out.println("<html><body>");
-                out.println("<h1 style='color:red;'>Validation Error</h1>");
-                out.println("<p>Event Date must be a future date</p>");
-                out.println("<a href='/static/event.html'>Go Back</a>");
-                out.println("</body></html>");
-                return;
+                valid = false;
+                writer.println("<h3 style='color:red'>Event Date must be a future date</h3>");
             }
-
         } catch (DateTimeParseException e) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Invalid Event Date</p>");
-            out.println("<a href='/static/event.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+            valid = false;
+            writer.println("<h3 style='color:red'>Invalid Event Date</h3>");
         }
 
-        System.out.println("======Validating capacity=======");
+        // Capacity Validation
         try {
             int cap = Integer.parseInt(capacity);
-
             if (cap <= 0) {
-                out.println("<html><body>");
-                out.println("<h1 style='color:red;'>Validation Error</h1>");
-                out.println("<p>Capacity must be greater than 0</p>");
-                out.println("<a href='/static/event.html'>Go Back</a>");
-                out.println("</body></html>");
-                return;
+                valid = false;
+                writer.println("<h3 style='color:red'>Capacity must be greater than 0</h3>");
             }
-
         } catch (NumberFormatException e) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Invalid Capacity</p>");
-            out.println("<a href='/static/event.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+            valid = false;
+            writer.println("<h3 style='color:red'>Invalid Capacity</h3>");
         }
 
-        System.out.println("======Validating registration fee=======");
+        // Fee Validation
         try {
             double registrationFee = Double.parseDouble(fee);
-
             if (registrationFee < 0) {
-                out.println("<html><body>");
-                out.println("<h1 style='color:red;'>Validation Error</h1>");
-                out.println("<p>Registration Fee cannot be negative</p>");
-                out.println("<a href='/static/event.html'>Go Back</a>");
-                out.println("</body></html>");
-                return;
+                valid = false;
+                writer.println("<h3 style='color:red'>Registration Fee cannot be negative</h3>");
             }
-
         } catch (NumberFormatException e) {
-            out.println("<html><body>");
-            out.println("<h1 style='color:red;'>Validation Error</h1>");
-            out.println("<p>Invalid Registration Fee</p>");
-            out.println("<a href='/static/event.html'>Go Back</a>");
-            out.println("</body></html>");
-            return;
+            valid = false;
+            writer.println("<h3 style='color:red'>Invalid Registration Fee</h3>");
         }
 
-        out.println("<html><body style='font-family:Arial;text-align:center;background:#f4f4f4;'>");
-        out.println("<h1 style='color:green'>Event Registered Successfully</h1>");
-        out.println("<br>");
-        out.println("<a href='index.html'>");
-        out.println("<button>Go to Home</button>");
-        out.println("</a>");
-        out.println("</body></html>");
+        if (valid) {
+            writer.println("<html>");
+            writer.println("<body style='font-family:Arial;text-align:center;background:#f4f4f4;'>");
+            writer.println("<h1 style='color:green'>Event Registered Successfully</h1>");
+            writer.println("<h3>Event Name : " + eventName + "</h3>");
+            writer.println("<h3>Organizer : " + organizerName + "</h3>");
+            writer.println("<h3>Event Date : " + eventDate + "</h3>");
+            writer.println("<h3>Venue : " + venue + "</h3>");
+            writer.println("<h3>Capacity : " + capacity + "</h3>");
+            writer.println("<h3>Fee : " + fee + "</h3>");
+            writer.println("<br>");
+            writer.println("<a href='event.html'>");
+            writer.println("<button>Register Another Event</button>");
+            writer.println("</a>");
+            writer.println("</body>");
+            writer.println("</html>");
+        } else {
+            writer.println("<br>");
+            writer.println("<a href='event.html'>");
+            writer.println("<button>Go Back</button>");
+            writer.println("</a>");
+        }
+
+        writer.close();
     }
 }
