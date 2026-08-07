@@ -101,8 +101,12 @@ public class EventServlet extends HttpServlet {
             return;
         }
 
-        out.println("<html><body>");
-        out.println("<h1>Event Registered Successfully</h1>");
+        out.println("<html><body style='font-family:Arial;text-align:center;background:#f4f4f4;'>");
+        out.println("<h1 style='color:green'>Event Registered Successfully</h1>");
+        out.println("<br>");
+        out.println("<a href='index.html'>");
+        out.println("<button>Go to Home</button>");
+        out.println("</a>");
         out.println("</body></html>");
     }
 }

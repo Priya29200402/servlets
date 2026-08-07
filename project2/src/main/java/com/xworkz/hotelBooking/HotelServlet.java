@@ -126,6 +126,10 @@ public class HotelServlet extends HttpServlet {
             writer.println("<a href='hotel.html'>");
             writer.println("<button>Book Another</button>");
             writer.println("</a>");
+            writer.println("<br><br>");
+            writer.println("<a href='index.html'>");
+            writer.println("<button>Go to Home</button>");
+            writer.println("</a>");
             writer.println("</body>");
             writer.println("</html>");
         } else {
