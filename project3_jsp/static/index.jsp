@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,9 +149,9 @@ h1 {
 
 				<hr>
 
-				<h5>Java JSP & Servlet Practice Project</h5>
+				<h5> JSP & Servlet Project </h5>
 
-				<p>Bootstrap 5 | JSP | Servlet</p>
+				<p>Developed by:Priya </p>
 
 			</div>
 
