@@ -25,7 +25,6 @@ public class FeedbackServlet extends HttpServlet {
         FeedbackDTO feedbackDTO = new FeedbackDTO(email, name, mobile, comment);
         System.out.println("Feedback DTO:"+feedbackDTO);
 
-
         request.setAttribute("feedback", "Feedback Submitted Successfully");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("Feedback.jsp");
         requestDispatcher.forward(request, response);

@@ -18,7 +18,6 @@
     <div class="col-md-6 mx-auto">
         <h2 class="text-center text-primary mb-4"> Create Account </h2>
         <form action="signup" method="post">
-
             <label>User ID</label>
             <input type="text"
                    name="userId"

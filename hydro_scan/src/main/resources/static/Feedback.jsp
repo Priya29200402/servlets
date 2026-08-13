@@ -19,7 +19,6 @@
     <div class="col-md-6 mx-auto">
         <h2 class="text-center text-primary mb-4"> Feedback </h2>
         <form action="feedback" method="post">
-
             <label>Name</label>
             <input type="text"
                    name="name"

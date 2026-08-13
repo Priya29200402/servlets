@@ -21,7 +21,6 @@
                    name="userId"
                    class="form-control mb-3"
                    placeholder="Enter User ID">
-
             <label>Password</label>
             <input type="password"
                    name="password"

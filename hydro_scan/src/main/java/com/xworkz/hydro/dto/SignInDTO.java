@@ -15,5 +15,4 @@ import java.io.Serializable;
 public class SignInDTO implements Serializable {
     private String userId;
     private String password;
-
 }

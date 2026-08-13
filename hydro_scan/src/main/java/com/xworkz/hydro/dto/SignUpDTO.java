@@ -11,7 +11,6 @@ import java.io.Serializable;
 @Setter
 @ToString
 @AllArgsConstructor
-
 public class SignUpDTO implements Serializable{
     private String userID;
     private String email;
