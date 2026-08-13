@@ -13,6 +13,7 @@ import java.io.Serializable;
 @ToString
 
 public class FeedbackDTO implements Serializable {
+
     private String email;
     private String name;
     private String mobile;
