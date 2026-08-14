@@ -7,10 +7,6 @@
 <nav class="navbar navbar-dark bg-primary">
     <div class="container">
         <a class="navbar-brand" href="index.html"> Hydro Scan </a>
-        <div>
-            <a class="text-white me-3" href="FeedBack.jsp"> Feedback </a>
-            <a class="text-white" href="SignIn.jsp"> Sign In </a>
-        </div>
     </div>
 </nav>
 

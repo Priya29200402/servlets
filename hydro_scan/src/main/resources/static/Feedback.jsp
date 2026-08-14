@@ -7,11 +7,6 @@
 <nav class="navbar navbar-dark bg-primary">
     <div class="container">
         <a class="navbar-brand" href="index.html"> Hydro Scan </a>
-        <div>
-            <a class="text-white me-3" href="SignUp.jsp"> SignUp </a>
-            <a class="text-white me-3" href="SignIn.jsp"> SignIn </a>
-            <a class="text-white" href="Feedback.jsp"> Feedback </a>
-        </div>
     </div>
 </nav>
 
@@ -47,6 +42,6 @@
         </form>
     </div>
 </div>
-     <p <span style="color: green;" align="center">${feedback}</span></p>
+<p class="text-center text-success mt-3">${feedback}</p>
 </body>
 </html>
