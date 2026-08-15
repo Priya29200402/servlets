@@ -42,6 +42,6 @@
         </form>
     </div>
 </div>
-<p class="text-center text-success mt-3">${feedback}</p>
+<p ${feedback}</p>
 </body>
 </html>

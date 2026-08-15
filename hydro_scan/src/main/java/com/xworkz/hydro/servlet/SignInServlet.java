@@ -1,7 +1,8 @@
 package com.xworkz.hydro.servlet;
 
-import com.sun.corba.se.spi.protocol.RequestDispatcherDefault;
 import com.xworkz.hydro.dto.SignInDTO;
+import com.xworkz.hydro.service.SignInService;
+import com.xworkz.hydro.service.SignInServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +16,7 @@ import java.io.IOException;
 public class SignInServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Running doPost in SignInServlet");
         String userId = request.getParameter("userId");
         String password = request.getParameter("password");
@@ -23,14 +24,13 @@ public class SignInServlet extends HttpServlet {
         SignInDTO signInDTO = new SignInDTO(userId, password);
         System.out.println("SignIn DTO:"+ signInDTO);
 
+        SignInService signInService = new SignInServiceImpl();
+        signInService.validateAndSave(signInDTO);
+
         request.setAttribute("signIn", "Sign In Successful");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("SignIn.jsp");
         requestDispatcher.forward(request, response);
 
-
-
     }
-
-
 
 }

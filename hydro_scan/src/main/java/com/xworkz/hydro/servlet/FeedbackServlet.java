@@ -2,6 +2,8 @@ package com.xworkz.hydro.servlet;
 
 import com.sun.corba.se.spi.protocol.RequestDispatcherDefault;
 import com.xworkz.hydro.dto.FeedbackDTO;
+import com.xworkz.hydro.service.FeedbackService;
+import com.xworkz.hydro.service.FeedbackServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +26,9 @@ public class FeedbackServlet extends HttpServlet {
 
         FeedbackDTO feedbackDTO = new FeedbackDTO(email, name, mobile, comment);
         System.out.println("Feedback DTO:"+feedbackDTO);
+
+        FeedbackService feedbackService = new FeedbackServiceImpl();
+        feedbackService.validateAndSave(feedbackDTO);
 
         request.setAttribute("feedback", "Feedback Submitted Successfully");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("Feedback.jsp");

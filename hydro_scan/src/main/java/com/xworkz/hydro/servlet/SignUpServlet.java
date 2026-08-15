@@ -1,6 +1,9 @@
 package com.xworkz.hydro.servlet;
 
 import com.xworkz.hydro.dto.SignUpDTO;
+import com.xworkz.hydro.service.SignUpService;
+import com.xworkz.hydro.service.SignUpServiceImpl;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +16,7 @@ import java.io.IOException;
 public class SignUpServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Running doPost in SignUpServlet");
         String userID = request.getParameter("userID");
         String email = request.getParameter("email");
@@ -22,6 +25,9 @@ public class SignUpServlet extends HttpServlet {
 
         SignUpDTO signUpDTO = new SignUpDTO(userID, email, password, confirmPassword);
         System.out.println("SignUp DTO:"+ signUpDTO);
+
+        SignUpService signUpService = new SignUpServiceImpl();
+        signUpService.validateAndSave(signUpDTO);
 
         request.setAttribute("signUpDTO", "Signup Successful");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("SignUp.jsp");

@@ -12,10 +12,8 @@
 
 <div class="container mt-5">
     <div class="col-md-5 mx-auto">
-        <h2 span style="color: black;" align="center">
-            Hydro Scan Sign In
-        </h2>
-        <form action="signin" method="post">
+
+        <form action="signup" method="post">
             <label>User ID</label>
             <input type="text"
                    name="userId"
@@ -28,7 +26,7 @@
                    placeholder="Enter Password">
 
             <button type="submit"
-                    class="btn btn-primary"> Sign In
+                    class="btn btn-primary"> Sign UP
             </button>
         </form>
     </div>
