@@ -19,6 +19,4 @@ public class FeedbackDTO implements Serializable {
     private String mobile;
     private String comment;
 
-
-
 }

@@ -28,11 +28,21 @@ public class FeedbackServlet extends HttpServlet {
         System.out.println("Feedback DTO:"+feedbackDTO);
 
         FeedbackService feedbackService = new FeedbackServiceImpl();
-        feedbackService.validateAndSave(feedbackDTO);
+        boolean saved=feedbackService.validateAndSave(feedbackDTO);
+        System.out.println("FeedbackDTO:"+saved);
 
-        request.setAttribute("feedback", "Feedback Submitted Successfully");
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("Feedback.jsp");
-        requestDispatcher.forward(request, response);
+        if(saved){
+            RequestDispatcher dispatcher=request.getRequestDispatcher("Feedback.jsp");
+            request.setAttribute("feedback", "Feedback Submitted Successfully");
+            dispatcher.forward(request,response);
+        }
+        else{
+            System.out.println("Data id Not saved Successfully");
+            RequestDispatcher dispatcher=request.getRequestDispatcher("Feedback.jsp");
+            request.setAttribute("failure Message","Feedback Not Submitted");
+            dispatcher.forward(request,response);
+
+        }
 
     }
 

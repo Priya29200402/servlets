@@ -42,6 +42,6 @@
         </form>
     </div>
 </div>
-<p ${feedback}</p>
+<p class  align="Center" style="color: green;">${feedback}</p>
 </body>
 </html>

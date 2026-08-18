@@ -42,6 +42,6 @@
         </form>
     </div>
 </div>
-     <p <span style="color: green;" align="center">${signIn}</span></p>
+     <p> <span style="color: green;" align="center">${signIn}</span></p>
 </body>
 </html>
