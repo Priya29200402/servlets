@@ -31,6 +31,6 @@
         </form>
     </div>
 </div>
-   <p> <span style="color: green;" align="center">${signUpDTO}</span></p>
+   <p> <span style="color: green;" align="center">${Success Message}</span></p>
 </body>
 </html>

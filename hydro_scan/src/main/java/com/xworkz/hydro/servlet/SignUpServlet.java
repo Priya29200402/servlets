@@ -27,10 +27,19 @@ public class SignUpServlet extends HttpServlet {
         System.out.println("SignUp DTO:"+ signUpDTO);
 
         SignUpService signUpService = new SignUpServiceImpl();
-        signUpService.validateAndSave(signUpDTO);
+        boolean saved=signUpService.validateAndSave(signUpDTO);
+        System.out.println("SignUpDTO:"+signUpDTO);
 
-        request.setAttribute("signUpDTO", "Signup Successful");
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("SignUp.jsp");
-        requestDispatcher.forward(request, response);
+        if(saved){
+            RequestDispatcher requestDispatcher=request.getRequestDispatcher("SignUp.jsp");
+            request.setAttribute("Success Message","SignUp Successful you can Now SignIn");
+            requestDispatcher.forward(request,response);
+        }else{
+            RequestDispatcher dispatcher=request.getRequestDispatcher("SignUp.jsp");
+            request.setAttribute("Failure Message","SignUp Failed Please Try Again");
+            dispatcher.forward(request,response);
+        }
+
+
     }
 }
