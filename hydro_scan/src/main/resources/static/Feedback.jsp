@@ -13,7 +13,13 @@
 <div class="container mt-5">
     <div class="col-md-6 mx-auto">
         <h2 class="text-center text-primary mb-4"> Feedback </h2>
+        <h1 style="color: black;" align="right">${sessionScope.session}</h1>
         <form action="feedback" method="post">
+            <label>User ID</label>
+            <input type="text"
+                   name="userId"
+                   class="form-control mb-3"
+                   placeholder="Enter User ID">
             <label>Name</label>
             <input type="text"
                    name="name"

@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FeedbackEntity {
+    private int feedbackId;
+    private String userId;
     private String email;
     private String name;
     private String mobile;

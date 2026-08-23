@@ -31,15 +31,13 @@ public class SignUpServlet extends HttpServlet {
         System.out.println("SignUpDTO:"+signUpDTO);
 
         if(saved){
-            RequestDispatcher requestDispatcher=request.getRequestDispatcher("SignUp.jsp");
+            RequestDispatcher requestDispatcher=request.getRequestDispatcher("SignIn.jsp");
             request.setAttribute("Success Message","SignUp Successful you can Now SignIn");
             requestDispatcher.forward(request,response);
         }else{
-            RequestDispatcher dispatcher=request.getRequestDispatcher("SignUp.jsp");
+            RequestDispatcher dispatcher=request.getRequestDispatcher("SignIn.jsp");
             request.setAttribute("Failure Message","SignUp Failed Please Try Again");
             dispatcher.forward(request,response);
         }
-
-
     }
 }

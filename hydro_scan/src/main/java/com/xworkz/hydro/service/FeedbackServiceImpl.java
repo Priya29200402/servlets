@@ -5,27 +5,25 @@ import com.xworkz.hydro.dao.FeedbackDAOImpl;
 import com.xworkz.hydro.dto.FeedbackDTO;
 import com.xworkz.hydro.entity.FeedbackEntity;
 
-public class FeedbackServiceImpl implements FeedbackService{
+public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public boolean validateAndSave(FeedbackDTO feedbackDTO) {
         System.out.println("Running Validate and Save in FeedbackServiceImpl");
 
-        //Validate DTO
-        if(feedbackDTO != null){
-            System.out.println("Valid DTO We can send Data to DAO");
-            //Conversion DTO-->Entity
-            FeedbackEntity feedbackEntity=new FeedbackEntity();
+        if (feedbackDTO != null) {
+            System.out.println("Valid DTO. We can send data to DAO.");
+
+            FeedbackEntity feedbackEntity = new FeedbackEntity();
+            feedbackEntity.setFeedbackId(feedbackDTO.getFeedbackId());
+            feedbackEntity.setUserId(feedbackDTO.getUserId());
             feedbackEntity.setName(feedbackDTO.getName());
             feedbackEntity.setEmail(feedbackDTO.getEmail());
             feedbackEntity.setComment(feedbackDTO.getComment());
             feedbackEntity.setMobile(feedbackDTO.getMobile());
 
-            //Sending Entity to DAO
-
-            FeedbackDAO feedbackDAO=new FeedbackDAOImpl();
-            feedbackDAO.save(feedbackEntity);
+            FeedbackDAO feedbackDAO = new FeedbackDAOImpl();
+            return feedbackDAO.save(feedbackEntity);
         }
-        return true;
+        return false;
     }
-
 }

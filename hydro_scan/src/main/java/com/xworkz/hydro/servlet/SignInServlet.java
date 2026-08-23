@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/signin",loadOnStartup = 1)
@@ -28,17 +29,15 @@ public class SignInServlet extends HttpServlet {
         boolean saved= signInService.validateAndSave(signInDTO);
 
         if(saved) {
-            RequestDispatcher requestDispatcher=request.getRequestDispatcher("SignIn.jsp");
-            request.setAttribute("Success Message","You Signed In Successfully");
+            RequestDispatcher requestDispatcher=request.getRequestDispatcher("Home.jsp");
+            HttpSession session = request.getSession();
+            session.setAttribute("userId",userId);
             requestDispatcher.forward(request,response);
         }else{
-            RequestDispatcher dispatcher=request.getRequestDispatcher("SignIn.jsp");
+            RequestDispatcher dispatcher=request.getRequestDispatcher("Register.jsp");
             request.setAttribute("Fail Message","Your Signed In Failed");
             dispatcher.forward(request,response);
 
         }
-
-
     }
-
 }

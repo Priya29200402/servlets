@@ -14,6 +14,8 @@ import java.io.Serializable;
 
 public class FeedbackDTO implements Serializable {
 
+    private int feedbackId;
+    private String userId;
     private String email;
     private String name;
     private String mobile;
