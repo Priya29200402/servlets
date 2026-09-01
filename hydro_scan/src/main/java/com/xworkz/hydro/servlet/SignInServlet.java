@@ -7,11 +7,9 @@ import com.xworkz.hydro.service.SignInServiceImpl;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
+import com.xworkz.hydro.util.RandomCharacterGenerator;
 
 @WebServlet(urlPatterns = "/signin",loadOnStartup = 1)
 public class SignInServlet extends HttpServlet {
@@ -35,6 +33,12 @@ public class SignInServlet extends HttpServlet {
             requestDispatcher.forward(request,response);
         }else{
             RequestDispatcher dispatcher=request.getRequestDispatcher("Register.jsp");
+
+            Cookie cookie = new Cookie("X-workz", RandomCharacterGenerator.randomString(10));
+            cookie.setMaxAge(365);
+            cookie.setDomain("localhost");
+            response.addCookie(cookie);
+
             request.setAttribute("Fail Message","Your Signed In Failed");
             dispatcher.forward(request,response);
 
